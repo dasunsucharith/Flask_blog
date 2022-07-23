@@ -13,7 +13,7 @@ posts = [
         'author': 'Rebecca Rubasinghe',
         'title': 'Blog post 2',
         'content': 'Second post content',
-        'date_posted', 'July 24, 2022'
+        'date_posted': 'July 24, 2022'
     }
 ]
 
