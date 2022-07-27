@@ -8,6 +8,11 @@ a {
     text-decoration: none !important;
 }
 
+.brand-image {
+  width: 40px;
+  height: 40px;
+}
+
 .site-header .navbar-nav .nav-link {
   color: #cbd5db;
 }
