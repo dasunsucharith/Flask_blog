@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/"><img class="brand-image" src="{{ url_for('static', filename='/images/flask_blog.png') }}" alt="flask-blog-image"></a>
+            <a class="navbar-brand" href="{{ url_for('home') }}"><img class="brand-image" src="{{ url_for('static', filename='/images/flask_blog.png') }}" alt="flask-blog-image"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -31,18 +31,18 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/about">About</a>
+                        <a class="nav-link active" href="{{ url_for('about') }}">About</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/login">Login</a>
+                        <a class="nav-link active" href="{{ url_for('login') }}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/register">Register</a>
+                        <a class="nav-link active" href="{{ url_for('register') }}">Register</a>
                     </li>
                 </ul>
             </div>
