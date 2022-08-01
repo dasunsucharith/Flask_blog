@@ -38,7 +38,7 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav">
-                    {% if current_user.is_autheticated %}
+                    {% if current_user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ url_for('account') }}">Account</a>
                         </li>
