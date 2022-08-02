@@ -7,25 +7,11 @@ from flaskblog.forms import RegistrationForm, LoginForm, UpdateAccountForm, Post
 from flaskblog.models import User, Post
 from flask_login import login_user, current_user, logout_user, login_required
 
-posts = [
-    {
-        'author': 'Dasun Sucharith',
-        'title': 'Blog post 1',
-        'content': 'First post content',
-        'date_posted': 'July 23, 2022'
-    },
-    {
-        'author': 'Rebecca Rubasinghe',
-        'title': 'Blog post 2',
-        'content': 'Second post content',
-        'date_posted': 'July 24, 2022'
-    }
-]
-
 
 @app.route("/")
 @app.route("/home")
 def home():
+    posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
 
@@ -108,7 +94,7 @@ def account():
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
-'''def save_thumb(form_thumb):
+def save_thumb(form_thumb):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_thumb.filename)
     thumb_fn = random_hex + f_ext
@@ -120,18 +106,21 @@ def account():
 
     i.save(thumb_path)
 
-    return thumb_fn'''
+    return thumb_fn
 
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        #if form.thumb.data:
-        #    thumb_file = save_thumb(form.thumb.data)
-        #    thumbnail = thumb_file
+        if form.thumb.data:
+            thumb_file = save_thumb(form.thumb.data)
+        post = Post(title=form.title.data, content=form.content.data, author=current_user, thumbnail=thumb_file)
+        db.session.add(post)
+        db.session.commit()
         flash('Your post has been created!', 'success')
+        return redirect(url_for('home'))
     
-    thumbnail = url_for('static', filename=f'thumbs/default_thumb.jpg')
+    #thumbnail = url_for('static', filename=f'thumbs/default_thumb.jpg')
 
-    return render_template('create_post.html', title="New Post", thumbnail=thumbnail, form=form)
+    return render_template('create_post.html', title="New Post", form=form)
