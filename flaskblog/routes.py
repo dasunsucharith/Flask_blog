@@ -108,7 +108,7 @@ def account():
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
-def save_thumb(form_thumb):
+'''def save_thumb(form_thumb):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_thumb.filename)
     thumb_fn = random_hex + f_ext
@@ -120,18 +120,18 @@ def save_thumb(form_thumb):
 
     i.save(thumb_path)
 
-    return thumb_fn
+    return thumb_fn'''
 
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        if form.thumb.data:
-            thumb_file = save_thumb(form.thumb.data)
-            thumbnail = thumb_file
+        #if form.thumb.data:
+        #    thumb_file = save_thumb(form.thumb.data)
+        #    thumbnail = thumb_file
         flash('Your post has been created!', 'success')
     
-    thumb_file = url_for('static', filename=f'thumbs/{ thumbnail }')
+    thumbnail = url_for('static', filename=f'thumbs/{ thumbnail }')
 
     return render_template('create_post.html', title="New Post", form=form, thumbnail=thumbnail)
