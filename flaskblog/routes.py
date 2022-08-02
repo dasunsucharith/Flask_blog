@@ -134,4 +134,4 @@ def new_post():
     
     thumbnail = url_for('static', filename=f'thumbs/{ thumbnail }')
 
-    return render_template('create_post.html', title="New Post", form=form, thumbnail=thumbnail)
+    return render_template('create_post.html', title="New Post", thumbnail=thumbnail,  form=form)
