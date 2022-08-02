@@ -132,6 +132,6 @@ def new_post():
         #    thumbnail = thumb_file
         flash('Your post has been created!', 'success')
     
-    thumbnail = url_for('static', filename=f'thumbs/{ thumbnail }')
+    thumbnail = url_for('static', filename=f'thumbs/default_thumb.jpg')
 
-    return render_template('create_post.html', title="New Post", thumbnail=thumbnail,  form=form)
+    return render_template('create_post.html', title="New Post", thumbnail=thumbnail, form=form)

@@ -31,12 +31,12 @@
                     {% endif %}
                     
                 </div>
-                <div class="form-check mb-3">
-                    {{ form.picture.label() }}
+                <div class="form-group mb-3">
+                    {{ form.thumb.label() }}
 
-                    {{ form.picture(class="form-control", type="file") }}
-                    {% if form.picture.errors %}
-                        {% for error in form.picture.errors %}
+                    {{ form.thumb(class="form-control", type="file") }}
+                    {% if form.thumb.errors %}
+                        {% for error in form.thumb.errors %}
                             <span class="text-danger">{{ error }}</span><br/>
                         {% endfor %}
                     {% endif %}
