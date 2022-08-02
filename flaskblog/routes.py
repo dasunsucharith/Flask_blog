@@ -115,9 +115,15 @@ def new_post():
     if form.validate_on_submit():
         if form.thumb.data:
             thumb_file = save_thumb(form.thumb.data)
-        post = Post(title=form.title.data, content=form.content.data, author=current_user, thumbnail=thumb_file)
-        db.session.add(post)
-        db.session.commit()
+            post = Post(title=form.title.data, content=form.content.data, 
+                        author=current_user, thumbnail=thumb_file)
+            db.session.add(post)
+            db.session.commit()
+        else:
+            post = Post(title=form.title.data, content=form.content.data,
+                        author=current_user)
+            db.session.add(post)
+            db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('home'))
     
