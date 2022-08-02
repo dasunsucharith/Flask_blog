@@ -107,10 +107,31 @@ def account():
     image_file = url_for('static', filename=f'images/{ current_user.image_file }')
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
+
+def save_thumb(form_thumb):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_thumb.filename)
+    thumb_fn = random_hex + f_ext
+    thumb_path = os.path.join(app.root_path, 'static/thumbs', thumb_fn)
+
+    output_size = (1920, 1080)
+    i = Image.open(form_thumb)
+    i.thumbnail(output_size)
+
+    i.save(thumb_path)
+
+    return thumb_fn
+
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
+        if form.thumb.data:
+            thumb_file = save_thumb(form.thumb.data)
+            current_user.thumbnail = thumb_file
         flash('Your post has been created!', 'success')
-    return render_template('create_post.html', title="New Post", form=form)
+    
+    thumb_file = url_for('static', filename=f'thumbs/{ current_user.thumbnail }')
+
+    return render_template('create_post.html', title="New Post", form=form, thumbnail=thumbnail)
