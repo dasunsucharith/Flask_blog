@@ -129,9 +129,9 @@ def new_post():
     if form.validate_on_submit():
         if form.thumb.data:
             thumb_file = save_thumb(form.thumb.data)
-            current_user.thumbnail = thumb_file
+            thumbnail = thumb_file
         flash('Your post has been created!', 'success')
     
-    thumb_file = url_for('static', filename=f'thumbs/{ current_user.thumbnail }')
+    thumb_file = url_for('static', filename=f'thumbs/{ thumbnail }')
 
     return render_template('create_post.html', title="New Post", form=form, thumbnail=thumbnail)
