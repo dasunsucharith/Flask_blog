@@ -94,39 +94,32 @@ def account():
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
-def save_thumb(form_thumb):
+def save_thumb(form_picture):
     random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_thumb.filename)
-    thumb_fn = random_hex + f_ext
-    thumb_path = os.path.join(app.root_path, 'static/thumbs', thumb_fn)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/thumbs', picture_fn)
 
-    output_size = (1920, 1080)
-    i = Image.open(form_thumb)
+    output_size = (125, 125)
+    i = Image.open(form_picture)
     i.thumbnail(output_size)
 
-    i.save(thumb_path)
+    i.save(picture_path)
 
-    return thumb_fn
+    return picture_fn
 
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
+    print(form.data)
     if form.validate_on_submit():
-        if form.thumb.data:
-            thumb_file = save_thumb(form.thumb.data)
-            post = Post(title=form.title.data, content=form.content.data, 
-                        author=current_user, thumbnail=thumb_file)
-            db.session.add(post)
-            db.session.commit()
-        else:
-            post = Post(title=form.title.data, content=form.content.data,
-                        author=current_user)
-            db.session.add(post)
-            db.session.commit()
+        if form.thumbnail.data:
+            thumb_file = save_thumb(form.thumbnail.data)
+            post = Post(title=form.title.data, content=form.content.data, author=current_user, thumbnail=thumb_file)
+
+        db.session.add(post)
+        db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('home'))
-    
-    #thumbnail = url_for('static', filename=f'thumbs/default_thumb.jpg')
-
     return render_template('create_post.html', title="New Post", form=form)

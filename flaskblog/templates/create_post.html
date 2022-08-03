@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="content-section">
-        <form method='POST' action="">
+        <form method='POST' action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4" >New Post</legend>
@@ -32,19 +32,19 @@
                     
                 </div>
                 <div class="form-group mb-3">
-                    {{ form.thumb.label() }}
+                    {{ form.thumbnail.label() }}
 
-                    {{ form.thumb(class="form-control", type="file") }}
-                    {% if form.thumb.errors %}
-                        {% for error in form.thumb.errors %}
+                    {{ form.thumbnail(class="form-control", type="file") }}
+                    {% if form.thumbnail.errors %}
+                        {% for error in form.thumbnail.errors %}
                             <span class="text-danger">{{ error }}</span><br/>
                         {% endfor %}
                     {% endif %}
+                </div> 
+                <div class="form-group mb-3">
+                    {{ form.submit(class="btn btn-outline-primary") }}
                 </div>
-            </fieldset>
-            <div class="form-group mb-3">
-                {{ form.submit(class="btn btn-outline-primary") }}
-            </div>
+            </fieldset>       
         </form>
     </div>
 {% endblock %}

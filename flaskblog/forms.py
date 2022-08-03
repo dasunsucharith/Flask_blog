@@ -48,5 +48,6 @@ class UpdateAccountForm(FlaskForm):
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    thumb = FileField('Add Post Thumbnail', validators=[FileAllowed(['jpg', 'png'])])
+    thumbnail = FileField('Add Post Thumbnail', validators=[
+                          FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Post')
