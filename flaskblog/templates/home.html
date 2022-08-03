@@ -4,6 +4,7 @@
     {% for post in posts %}
         <div class="card">
             <div class="card-header">
+                <img src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="" class="rouded-circle article-img">
                 <a class="mr-2" href="#">{{ post.author.username }}</a>
                 <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
             </div>
@@ -14,10 +15,10 @@
 
             <div class=" card-body row">
                 <div class="col-md-4">
-                    <img class="thumb-img" src="/static/thumbs/{{ post.thumbnail }}" alt="thumbnail">
+                    <img class="thumb-img" src="{{ url_for('static', filename='thumbs/' + post.thumbnail) }}" alt="thumbnail">
                 </div>
                 <div class="col-md-8">
-                    <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+                    <h2><a class="article-title" href="{{url_for('post', post_id=post.id)}}">{{ post.title }}</a></h2>
                     <p class="article-content">{{ post.content }}</p>
                 </div>
             </div>
