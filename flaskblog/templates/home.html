@@ -4,7 +4,7 @@
     {% for post in posts.items %}
         <div class="card">
             <div class="card-header">
-                <img src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="" class="rouded-circle article-img">
+                <img src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="" class="rounded-circle article-img-avatar">
                 <a class="mr-2" href="#">{{ post.author.username }}</a>
                 <small class="text-muted">{{ post.date_posted.strftime("%Y-%m-%d") }}</small>
             </div>
