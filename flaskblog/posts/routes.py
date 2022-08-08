@@ -44,14 +44,11 @@ def update_post(post_id):
     form = PostForm()
 
     if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
         if form.thumbnail.data:
-            post.title = form.title.data
-            post.content = form.content.data
             thumb_file = save_thumb(form.thumbnail.data)
             post.thumbnail = thumb_file
-        else:
-            post.title = form.title.data
-            post.content = form.content.data
         db.session.commit()
         flash('Your Post has been updated!', 'success')
         return redirect(url_for('post', post_id=post.id))
