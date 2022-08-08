@@ -1,4 +1,5 @@
 import os
+import pymysql
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt 
@@ -6,13 +7,18 @@ from flask_login import LoginManager
 from flask_mail import Mail 
 from flaskblog.config import Config
 
-
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
 login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 mail = Mail()
+
+#app = Flask(__name__)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = conn
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
+#db = SQLAlchemy(app)
 
 
 def create_app(config_class=Config):

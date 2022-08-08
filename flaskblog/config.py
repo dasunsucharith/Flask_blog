@@ -3,7 +3,7 @@ import os
 class Config:
     SECRET_KEY = '843eaa1491c7a4130988d7c3ee4a9f4c'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///database.db'
-    
+    #SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:@localhost/flask_blog'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
