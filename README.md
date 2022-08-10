@@ -18,3 +18,16 @@ Password:- testuser123
 - Flask
 - MySQL
 - SQLite
+
+**Run the project on local host**
+
+1. Install the requirements.txt
+
+```
+pip install -r requirements.txt
+```
+
+2. Run the project 
+```
+python app.py
+```
